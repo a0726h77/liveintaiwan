@@ -1,0 +1,32 @@
+application: yanliveintaiwan
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /images
+  static_dir: images
+
+- url: /place_update
+  script: place_update.py
+
+- url: /place_add
+  script: place_add.py
+
+- url: /place_save
+  script: place_save.py
+
+- url: /people_add
+  script: people_add.py
+
+- url: /people_count
+  script: people_count.py
+
+- url: /savefile
+  script: savefile.py
+
+- url: /captcha
+  script: captcha.py
+
+- url: /.*
+  script: index.py

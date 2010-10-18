@@ -1,0 +1,18 @@
+http://code.google.com/intl/zh-TW/appengine/docs/python/gettingstarted/
+
+download python sdk
+
+https://appengine.google.com/
+
+create project directory
+
+./google_appengine/dev_appserver.py yanliveintaiwan/
+http://localhost:8080/
+
+./google_appengine/appcfg.py update yanliveintaiwan/
+./google_appengine/appcfg.py rollback yanliveintaiwan/
+http://yanliveintaiwan.appspot.com/
+
+
+
+http://code.google.com/p/google-maps-icons/

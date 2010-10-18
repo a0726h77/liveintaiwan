@@ -1,0 +1,6 @@
+indexes:
+- kind: Place
+  properties:
+  - name: name
+  - name: address
+  - name: geopt
