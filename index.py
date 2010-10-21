@@ -53,7 +53,7 @@ class MainPage(webapp.RequestHandler):
 #        query = db.GqlQuery("SELECT * FROM Place WHERE geopt >= :1 AND geopt <= :2",db.GeoPt(lat=minLat, lon=minLon), db.GeoPt(lat=maxLat, lon=maxLon) )
         
         places = list()
-        i = 1 
+        i = 1
         for q in query.fetch(100):
 	    #print q.fields()
 	    name = cgi.escape(q.name).replace("'", "\\'").replace('"', '\\"')
