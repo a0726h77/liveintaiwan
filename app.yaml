@@ -28,5 +28,8 @@ handlers:
 - url: /captcha
   script: captcha.py
 
+- url: /rest/.*
+  script: api_v1.py
+
 - url: /.*
   script: index.py

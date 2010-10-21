@@ -24,6 +24,7 @@ class Place(db.Model):
     address = db.StringProperty()
     geopt = db.GeoPtProperty()
 
+
 class MainPage(webapp.RequestHandler):
     def get(self):
 #        greetings_query = Greeting.all().order('-date')
@@ -37,13 +38,13 @@ class MainPage(webapp.RequestHandler):
 #            url_linktext = 'Login'
 
 
-	query = db.GqlQuery("SELECT * FROM Place")
+        query = db.GqlQuery("SELECT * FROM Place")
 
-	#query = db.GqlQuery("SELECT * FROM Place WHERE address >= :1 AND address < :2", u"台北市", u"台北市" + u"\ufffd")
+        #query = db.GqlQuery("SELECT * FROM Place WHERE address >= :1 AND address < :2", u"台北市", u"台北市" + u"\ufffd")
 
 #        lat = float(25.051941)
 #        lon = float(121.516982)
-#	#area = .0005
+#        #area = .0005
 #        area = .04
 #        minLat = lat - area
 #        minLon = lon - area
@@ -52,26 +53,29 @@ class MainPage(webapp.RequestHandler):
 #        query = db.GqlQuery("SELECT * FROM Place WHERE geopt >= :1 AND geopt <= :2",db.GeoPt(lat=minLat, lon=minLon), db.GeoPt(lat=maxLat, lon=maxLon) )
         
         places = list()
-	i = 1 
-	for q in query.fetch(100):
-            #places.append(dict(sn=i, name=q.name, address=q.address, lat=q.lat, lng=q.lng))
-	    print q.fields()
-            places.append(dict(sn=i, name=q.name, address=q.address, key=str(q.key()), geopt=q.geopt))
-	    i += 1
+        i = 1 
+        for q in query.fetch(100):
+	    #print q.fields()
+	    name = cgi.escape(q.name).replace("'", "\\'").replace('"', '\\"')
+            address = cgi.escape(q.address).replace("'", "\\'").replace('"', '\\"')
+
+            places.append(dict(sn=i, name=name, address=address, key=str(q.key()), geopt=q.geopt))
+            i += 1
 
         template_values = {
 #            'greetings': greetings,
 #            'url': url,
 #            'url_linktext': url_linktext,
-	    'places' : places
+            'places' : places
             }
 
         path = os.path.join(os.path.dirname(__file__), 'index.html')
         self.response.out.write(template.render(path, template_values))
 
 application = webapp.WSGIApplication(
-                                     [('/', MainPage)],
+                                     [('/.*', MainPage)],
                                           debug=True)
+
 
 def main():
     run_wsgi_app(application)
