@@ -11,10 +11,8 @@ rest.Dispatcher.base_url = "/rest"
 #	  "foo": Customer,
 #	   })
 rest.Dispatcher.add_models({
-    'place' : (Place, rest.READ_ONLY_MODEL_METHODS)
+    'place' : (Place, ['GET_METADATA', 'GET', 'POST'])
 })
-#    'bar' : (BarModel, ['GET_METADATA', 'GET', 'POST', 'PUT'],
-#    'cache' : (CacheModel, ['GET', 'DELETE'] })
 
 
 application = webapp.WSGIApplication([
